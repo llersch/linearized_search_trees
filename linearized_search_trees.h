@@ -133,3 +133,30 @@ size_t array_to_complete_tree(size_t size, int K, size_t array_idx) {
         return array_to_perfect_tree(size, K, array_idx-o-1, H-1);
     }
 }
+
+/**
+ * @brief Maps an index in a linearized complete K-ary search tree to an index
+ * in a sorted array.
+ *
+ * @param size total size of the array/tree.
+ * @param K arity of the linearized search tree being converted to.
+ * @param tree_idx index in the tree to be converted to an array index.
+ * @return size_t corresponding index in the sorted array.
+ */
+size_t complete_tree_to_array(size_t size, int K, size_t tree_idx) {
+    assert(K > 1);
+    assert(size > 0);
+    assert(tree_idx >= 0 && tree_idx < size);
+
+    const size_t H = std::ceil(std::log(size+1) / std::log(K));
+    const size_t fringe = perfect_tree_to_array(size, K, size-1, H);
+    const size_t array_idx = perfect_tree_to_array(size, K, tree_idx, H);
+    if(array_idx <= fringe) {
+        return array_idx;
+    }
+    else {
+        const size_t d = std::floor(std::log(size) / std::log(K));
+        const size_t o = size - std::pow(K,d);
+        return perfect_tree_to_array(size, K, tree_idx, H-1) + o + 1;
+    }
+}
