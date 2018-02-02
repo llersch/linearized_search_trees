@@ -91,7 +91,7 @@ size_t perfect_tree_to_array(size_t size,
     const size_t idx = tree_idx + 1;
     const size_t d = std::floor(std::log(idx) / std::log(K));
     const size_t o = idx - std::pow(K,d);
-    return std::pow(K, H-d-1) * std::floor((K*o)/(K-1)+1);
+    return std::pow(K, H-d-1) * std::floor((K*o)/(K-1)+1) - 1;
 }
 
 /**
