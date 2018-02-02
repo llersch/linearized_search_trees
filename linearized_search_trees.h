@@ -124,7 +124,7 @@ size_t array_to_complete_tree(size_t size, int K, size_t array_idx) {
 
     const size_t H = std::ceil(std::log(size+1) / std::log(K));
     const size_t fringe = perfect_tree_to_array(size, K, size-1, H);
-    if(array_idx < fringe) {
+    if(array_idx <= fringe) {
         return array_to_perfect_tree(size, K, array_idx, H);
     }
     else {
