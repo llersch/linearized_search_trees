@@ -17,7 +17,7 @@ size_t lower_bound(const std::vector<uint32_t>& tree_array, int size, int k, uin
                 return tree_array[node + i];
             else if(tree_array[node+i] < key)
             {
-				// Key is greater, save lower bound and go to next key in this node.
+		// Key is greater, save lower bound and go to next key in this node.
                 low = node + child;
                 ++child;
             }
