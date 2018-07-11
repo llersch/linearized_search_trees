@@ -38,13 +38,13 @@ namespace lst {
          * @param size number of elements in the array/tree.
          * @param K maximum number of children a tree node can have.
          */
-        explicit mapper(int size, int K) {
+        explicit mapper(size_t size, unsigned int K) {
               assert(size > 0 && K > 2);
 
               size_ = size;
               K_ = K;
               height_ = ceil_log(K_, size+1);
-              const int d_size = floor_log(K_, size_);
+              const unsigned int d_size = floor_log(K_, size_);
               o_size_ = size_ - std::pow(K_, d_size);
               fringe_ = std::pow(K, height_-d_size-1) * std::floor((K*o_size_)/(K-1)+1) - 1;
         }
@@ -54,23 +54,23 @@ namespace lst {
          * complete K-ary search tree.
          *
          * @param array_idx index in the array.
-         * @return int corresponding index in the search tree.
+         * @return size_t corresponding index in the search tree.
          */
-        int array_to_tree(int array_idx) const {
-            assert(array_idx >= 0 && array_idx < size_);
+        size_t array_to_tree(size_t array_idx) const noexcept {
+            assert(array_idx < size_);
 
-            int H = height_;
+            unsigned int H = height_;
             if(array_idx > fringe_) {
                 array_idx = array_idx - o_size_ - 1;
                 H = height_ - 1;
             }
 
             array_idx = array_idx + 1;
-            int d = 0;
-            for(int i=1; i<H; ++i) {
+            unsigned int d = 0;
+            for(unsigned int i=1; i<H; ++i) {
                 d += array_idx % static_cast<int>(std::pow(K_, H-i)) > 0 ? 1 : 0;
             }
-            const int o = std::floor(((K_-1)*array_idx) / std::pow(K_, H-d));
+            const unsigned int o = std::floor(((K_-1)*array_idx) / std::pow(K_, H-d));
             return std::pow(K_, d) + o - 1;
         }
 
@@ -79,10 +79,10 @@ namespace lst {
          * an index in the sorted array.
          *
          * @param tree_idx index in the tree.
-         * @return int corresponding index in the sorted array.
+         * @return size_t corresponding index in the sorted array.
          */
-        int tree_to_array(int tree_idx) const {
-            assert(tree_idx >= 0 && tree_idx < size_);
+        size_t int tree_to_array(size_t tree_idx) const noexcept {
+            assert(tree_idx < size_);
 
             tree_idx = tree_idx + 1;
             const int d = floor_log(K_, tree_idx);
@@ -137,18 +137,18 @@ namespace lst {
 
     private:
         /// Number of elements in the array/tree being used.
-        int size_;
+        size_t size_;
 
         /// Parameter K for a K-ary tree.
-        int K_;
+        unsigned int K_;
 
         /// Height of the K-ary tree.
-        int height_;
+        unsigned int height_;
 
         /// Tree offset of last array element.
-        int o_size_;
+        size_t o_size_;
 
         /// Fringe element
-        int fringe_;
+        size_t fringe_;
     };
 }
