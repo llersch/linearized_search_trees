@@ -50,7 +50,7 @@ size_t lower_bound(const std::vector<uint32_t>& tree, const unsigned int K, uint
                 low = node + child;
                 ++child;
             }
-           	else
+           else
                 break;      // Key smaller, we have found our child!
         }
 
