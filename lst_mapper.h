@@ -81,7 +81,7 @@ namespace lst {
          * @param tree_idx index in the tree.
          * @return size_t corresponding index in the sorted array.
          */
-        size_t int tree_to_array(size_t tree_idx) const noexcept {
+        size_t tree_to_array(size_t tree_idx) const noexcept {
             assert(tree_idx < size_);
 
             tree_idx = tree_idx + 1;
