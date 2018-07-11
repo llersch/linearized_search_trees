@@ -36,8 +36,9 @@ namespace lst {
  * @param tree vector containing the tree in serialized format.
  * @param K maximum number of children a tree node can have.
  * @param key key to be searched for.
+ * @return uint32_t element corresponding to the lower bound of given key.
  */
-size_t lower_bound(const std::vector<uint32_t>& tree, const unsigned int K, uint32_t key) {
+uint32_t lower_bound(const std::vector<uint32_t>& tree, const unsigned int K, uint32_t key) {
     size_t low = 0;
     size_t node = 0;
     do {
