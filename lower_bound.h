@@ -28,6 +28,8 @@
 
 #include <vector>
 
+namespace lst {
+
 /**
  * @brief Search for the lower bound of a given key.
  *
@@ -57,4 +59,5 @@ size_t lower_bound(const std::vector<uint32_t>& tree, const unsigned int K, uint
         node = (node*K) + (child+1)*(K-1);
     } while(node < tree.size());
     return tree[low];
+}
 }
